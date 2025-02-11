@@ -22,7 +22,7 @@ This project provides a Docker-based environment to deploy and manage a WordPres
 
    ```sh
    git clone https://github.com/hanhnq/wordpress_project.git
-   cd your-repository
+   cd wordpress_project
    ```
 
 2. Copy the environment example file and configure it:
