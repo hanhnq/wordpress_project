@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  wordpress:
+    image: wordpress:php8.2-fpm
+    container_name: ${PRODUCTION_NAME}_wordpress
+    restart: always
+    depends_on:
+      - mysql
+    volumes:
+      - ./wordpress:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: ${PRODUCTION_DB_HOST}
+      WORDPRESS_DB_USER: ${PRODUCTION_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${PRODUCTION_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${PRODUCTION_DB_NAME}
+
+  mysql:
+    image: mysql:8.0
+    container_name: ${PRODUCTION_NAME}_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PRODUCTION_DB_PASSWORD}
+      MYSQL_DATABASE: ${PRODUCTION_DB_NAME}
+      MYSQL_USER: ${PRODUCTION_DB_USER}
+      MYSQL_PASSWORD: ${PRODUCTION_DB_PASSWORD}
+    ports:
+      - "${LOCAL_DB_PORT}:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+
+  nginx:
+    image: nginx:latest
+    container_name: ${PRODUCTION_NAME}_nginx
+    restart: always
+    ports:
+      - "${LOCAL_SERVER_PORT}:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./wordpress:/var/www/html
