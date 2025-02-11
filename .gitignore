@@ -16,3 +16,5 @@ docker-compose.prod.yml
 node_modules/
 vendor/
 /.env
+/wordpress/wp-config-docker.php
+/wordpress/wp-config.php
