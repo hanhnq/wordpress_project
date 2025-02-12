@@ -8,7 +8,6 @@ This project provides a Docker-based environment to deploy and manage a WordPres
 - MySQL database for storing WordPress content
 - Docker Compose for easy setup and management
 - SSL configuration using Nginx Proxy Manager
-- Automatic deployment via GitHub Actions
 
 ## Requirements
 
@@ -53,10 +52,6 @@ If the database is not initialized, run the WordPress installation script manual
 docker exec -it wordpress_local_wordpress bash
 wp core install --url="http://localhost:8080" --title="Local WordPress" --admin_user="admin" --admin_password="admin" --admin_email="admin@example.com"
 ```
-
-## Deployment
-
-This project is set up to use GitHub Actions for automatic deployment when changes are pushed to the `main` branch. Ensure your cloud server is properly configured with Docker and SSH keys.
 
 ## Troubleshooting
 
